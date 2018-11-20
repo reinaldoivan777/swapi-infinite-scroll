@@ -1,17 +1,32 @@
 import React, { Component } from 'react'
 import fetch from 'isomorphic-fetch'
 import People from './people'
+import {css} from 'react-emotion'
+
+//untuk animasi loading
+import {PropagateLoader} from 'react-spinners'
+
+//styling buat animasi loading
+const override = css`
+    display: block;
+    margin-left: 48%;
+    border-color: red;
+    position: center;
+`;
 
 class PeopleList extends Component {
-    state = { 
-        peoples: [],
-        page: 1,
-        next: '',
-        loading: false,
-        scrolling: false
+    constructor(props) {
+        super(props)
+
+        this.state = { 
+            peoples: [],
+            page: 1,
+            next: '',
+            loading: false,
+            scrolling: false,   
+        }
     }
 
-    //WARNING! To be deprecated in React v17. Use componentDidMount instead.
     componentWillMount() {
         this.loadPeoples()
         this.scrollListener = window.addEventListener('scroll', (e) => {
@@ -31,6 +46,7 @@ class PeopleList extends Component {
         }
     }
 
+    //mengambil data dari API SWAPI
     loadPeoples = () => {
         const { page, peoples } = this.state
         let url = `https://swapi.co/api/people/?page=${page}&format=json`
@@ -45,6 +61,7 @@ class PeopleList extends Component {
             }))
     }
 
+    //ketika sudah sampai bawah akan load more
     loadMore = () => {
         if (this.state.next != null) {
             this.setState(prevState => ({
@@ -62,12 +79,18 @@ class PeopleList extends Component {
             <div>
                 <ul className="peoples">
                     {
-                        this.state.peoples.map(people => <li key={people.name}>
+                        this.state.peoples.map(people => <li key={people.url}>
                             <People {...people} />
                         </li>)
                     }
                 </ul>
-                {(this.state.loading === true) ? <h3>Load More</h3> : ''}
+                <PropagateLoader
+                    className={override}
+                    sizeUnit={"px"}
+                    size={32}
+                    color={'#e1e300'}
+                    loading={this.state.loading}
+                />
                 {(this.state.endofpage === true) ? <h3>Back to the top</h3>: ''}
             </div>
         )

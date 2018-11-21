@@ -19,6 +19,22 @@ body.bodi {
   color: #c8c8c8;
 }
 
+.bg-nav {
+  background-color: #161616;
+}
+
+.logo {
+  opacity: 1;
+  margin: 30px;
+  transition: opacity 350ms;
+}
+
+.app-content {
+  margin-top: 14em!important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .brand {
   margin: 30px;
 }
@@ -31,4 +47,8 @@ body.bodi {
 
 .modal {
   color: #1c1e22;
+}
+
+.navbarTop {
+  margin-bottom: 200px;
 }

@@ -9,7 +9,7 @@ import {PropagateLoader} from 'react-spinners'
 //styling buat animasi loading
 const override = css`
     display: block;
-    margin-left: 48%;
+    margin-left: 49%;
     border-color: red;
     position: center;
 `;
@@ -91,7 +91,7 @@ class PeopleList extends Component {
                     color={'#e1e300'}
                     loading={this.state.loading}
                 />
-                {(this.state.endofpage === true) ? <h3>Back to the top</h3>: ''}
+                {(this.state.endofpage === true) ? <p>&copy; Ivan Reinaldo</p>: ''}
             </div>
         )
     }

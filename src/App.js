@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import PeopleList from './People'
+import Navigation from './Navs/Navigation'
+import { Container } from "reactstrap";
+import './index.css'
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <img src="https://static-mh.content.disney.io/starwars/assets/navigation/sw_logo_stacked-336c62367939.png" alt="Star wars" className="brand" />
-        <PeopleList />
-      </div>
+      <Container fluid>
+        <header>
+          <Navigation />
+        </header>
+        <div className="app-content">
+          <PeopleList />
+        </div>
+      </Container>
     )
   }
 }

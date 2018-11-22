@@ -24,7 +24,7 @@ class PeopleList extends Component {
             next: '',
             loading: false,
             scrolling: false,
-            gender: '', 
+            gender: 'all', 
         }
 
         this.filterGender = this.filterGender.bind(this)

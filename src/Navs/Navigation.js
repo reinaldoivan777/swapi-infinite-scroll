@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
 
+
+//Navbar navigation
 class Navigation extends Component {
     constructor(props) {
         super(props)
@@ -15,6 +17,7 @@ class Navigation extends Component {
         this.listenScrollEvent = window.addEventListener('scroll', (e) => {this.handleScroll(e)})
     }
     
+    //mengubah logo pada saat scrolling
     handleScroll = (e) => {
         if(window.scrollY > 200) {
             this.setState({

@@ -23,8 +23,11 @@ class PeopleList extends Component {
             page: 1,
             next: '',
             loading: false,
-            scrolling: false,   
+            scrolling: false,
+            gender: '', 
         }
+
+        this.filterGender = this.filterGender.bind(this)
     }
 
     componentWillMount() {
@@ -44,6 +47,13 @@ class PeopleList extends Component {
         if(pageOffset > lastLiOffset - bottomOffset) {
             this.loadMore()
         }
+    }
+
+    //melakukan filter list berdasarkan gender yang dipilih
+    filterGender(e) {
+        this.setState({
+            gender: e.target.value
+        })
     }
 
     //mengambil data dari API SWAPI
@@ -77,11 +87,28 @@ class PeopleList extends Component {
     render() { 
         return (
             <div>
+                <select onChange={this.filterGender}>
+                    <option value="all">All Genders</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="n/a">N/A</option>
+                </select>
                 <ul className="peoples">
                     {
-                        this.state.peoples.map(people => <li key={people.url}>
-                            <People {...people} />
-                        </li>)
+                        this.state.peoples.map(people => {
+                            if (this.state.gender === 'all') {
+                                return (<li key={people.url}>
+                                    <People {...people} />
+                                </li>)
+                            }
+                            else {
+                                if(this.state.gender === people.gender){
+                                    return (<li key={people.url}>
+                                        <People {...people} />
+                                    </li>)
+                                }
+                            }
+                        })
                     }
                 </ul>
                 <PropagateLoader
